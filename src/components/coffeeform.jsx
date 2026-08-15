@@ -1,24 +1,27 @@
 import { useState } from 'react';
 
-function CoffeeForm({ onSubmit, intialData = {}}){
+function CoffeeForm({ onSubmit, initialData = {}}){
     const [formData, setFormData] = useState({
-        name:intialData.name || "",
-        price:intialData.price || "",
-        description: intialData.description || "",
-        image: intialData.image || "",
+        name: initialData.name || "",
+        price: initialData.price || "",
+        description: initialData.description || "",
+        image: initialData.image || "",
     
     });
+
     function handleChange(e) {
         const {name,value}=e.target;
         setFormData({...formData,[name]:value,
 
         });
     }
-    functionhandleSubmit(e);{
+
+    function handleSubmit(e) {
         e.preventDefault();
         onSubmit(formData);
 
     }
+
     return(
         <form onSubmit={handleSubmit}>
             <label htmlFor="name">Coffee Name</label>
@@ -31,6 +34,7 @@ function CoffeeForm({ onSubmit, intialData = {}}){
             placeholder="Enter coffee name"
             required
             />
+
             <label htmlFor='price'>Price</label>
             <input
             id="price"
@@ -41,6 +45,7 @@ function CoffeeForm({ onSubmit, intialData = {}}){
             placeholder="Enter price"
             required
             />
+
             <label htmlFor='description'>Description</label>
             <textarea
             id="description"
@@ -50,7 +55,8 @@ function CoffeeForm({ onSubmit, intialData = {}}){
             placeholder="Enter coffee description"
             required
             />
-<label htmlFor='image'>Image URL</label>
+
+            <label htmlFor='image'>Image URL</label>
             <textarea
             id="image"
             type="text"
@@ -60,9 +66,11 @@ function CoffeeForm({ onSubmit, intialData = {}}){
             placeholder="Enter image URL"
             required
             />
+
             <button type="submit">Add Coffee</button>
         </form>
     );
 
 }
+
 export default CoffeeForm
