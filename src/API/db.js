@@ -1,0 +1,54 @@
+const db = {
+  coffees: [
+    {
+      id: 1,
+      name: "Cappuccino",
+      price: 450,
+      description: "Espresso with steamed milk and a thick layer of foam.",
+      image: "https://images.pexels.com/photos/29007358/pexels-photo-29007358.jpeg?w=500",
+    },
+    {
+      id: 2,
+      name: "Espresso",
+      price: 350,
+      description: "A strong, concentrated shot of coffee.",
+      image: "https://images.pexels.com/photos/9501559/pexels-photo-9501559.jpeg?w=500",
+    },
+    {
+      id: 3,
+      name: "Iced Coffee",
+      price: 400,
+      description: "Chilled coffee served over ice.",
+      image: "https://images.pexels.com/photos/35229818/pexels-photo-35229818.jpeg?w=500",
+    },
+    {
+      id: 4,
+      name: "Kenyan Latte",
+      price: 500,
+      description: "Smooth latte made with premium Kenyan coffee beans and steamed milk.",
+      image: "https://images.pexels.com/photos/30395140/pexels-photo-30395140.jpeg?w=500",
+    },
+    {
+      id: 5,
+      name: "Flat White",
+      price: 480,
+      description: "Espresso with microfoamed milk for a velvety finish.",
+      image: "https://images.pexels.com/photos/14689202/pexels-photo-14689202.jpeg?w=500",
+    },
+    {
+      id: 6,
+      name: "Cold Brew",
+      price: 550,
+      description: "Slow-steeped coffee for a smooth, less acidic taste.",
+      image: "https://images.pexels.com/photos/13302015/pexels-photo-13302015.jpeg?w=500",
+    },
+    {
+      id: 7,
+      name: "Mocha",
+      price: 250,
+      description: "A chococolate flavour with streamed milk",
+      image: "https://images.pexels.com/photos/27666788/pexels-photo-27666788.jpeg?w=500",
+    },
+  ],
+};
+export default db;
