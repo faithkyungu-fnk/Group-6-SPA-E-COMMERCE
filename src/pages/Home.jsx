@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Home() {
     return (
 
@@ -11,7 +13,7 @@ function Home() {
                         Discover delicious coffee made with care and passion.
                     </p>
 
-                    <button>Explore Our Menu</button>
+                    <Link to="/menu">Explore Our Menu</Link>
                 </div>
              </section>
 
