@@ -10,10 +10,11 @@ function Home() {
                 <div className="hero-content">
                     <h1>Enjoy Your Perfect Cup of Coffee</h1>
                     <p>
-                        Discover delicious coffee made with care and passion.
+                        Freshly brewed coffee, carefully crafted to make every moment worth savoring.
                     </p>
 
-                    <Link to="/menu">Explore Our Menu</Link>
+                    <Link to="/menu" className="hero-button">
+                    Explore Our Menu</Link>
                 </div>
              </section>
 
@@ -21,7 +22,7 @@ function Home() {
                <section className="welcome">
                 <h2>Welcome to BrewCoffee</h2>
                 <p>
-                    We are passionate about serving quality coffee and creating a warm and welcoming experience for every customer.
+                    From rich espresso to smooth lattes, we serve quality coffee made with care, passion, and the finest beans.
                 </p>
                </section>
         </main>

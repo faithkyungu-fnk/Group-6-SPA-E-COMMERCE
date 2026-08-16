@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import coffeeForm from "../components/coffeeform";
+import CoffeeForm from "../components/coffeeform";
 
 function AddCoffee(){
     const navigate = useNavigate();
@@ -30,12 +30,14 @@ function AddCoffee(){
         console.error("Error adding coffee:", error);
       });
   }
-    }
+    
     return(
         <div>
             <h1>Add Coffee</h1>
             <CoffeeForm onSubmit={handleAddCoffee}/>
         </div>
     );
+  
+}
 
 export default AddCoffee;
