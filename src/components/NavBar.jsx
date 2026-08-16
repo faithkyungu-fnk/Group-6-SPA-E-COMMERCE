@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, NavLink } from "react-router-dom"
 import "./NavBar.css";
 
 function NavBar() {
@@ -6,9 +7,8 @@ function NavBar() {
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Shop", path: "/products" },
-    { name: "Categories", path: "/categories" },
-    { name: "About Us", path: "/about" },
+    { name: "Menu", path: "/menu" },
+    { name: "Add Coffee", path: "/add-coffee" },
   ];
 
   const closeMenu = () => {
@@ -20,23 +20,23 @@ function NavBar() {
       <div className="navbar-container">
 
         {/* Logo */}
-        <a href="/" className="navbar-logo" onClick={closeMenu}>
-          <div className="logo-mark">S</div>
+        <Link to="/" className="navbar-logo" onClick={closeMenu}>
+          <div className="logo-mark">BC</div>
           <div className="logo-name">
-            Shop<span>Ease</span>
+            Brew<span>Coffee</span>
           </div>
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="desktop-nav">
           {navLinks.map((link) => (
-            <a
+            <NavLink
               key={link.name}
-              href={link.path}
+              to={link.path}
               className={link.name === "Home" ? "active" : ""}
             >
               {link.name}
-            </a>
+            </NavLink>
           ))}
         </nav>
 
@@ -70,9 +70,9 @@ function NavBar() {
       {/* Mobile Menu */}
       <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         {navLinks.map((link) => (
-          <a key={link.name} href={link.path} onClick={closeMenu}>
+          <NavLink key={link.name} to={link.path} onClick={closeMenu}>
             {link.name}
-          </a>
+          </NavLink>
         ))}
 
         <a href="/cart" onClick={closeMenu}>

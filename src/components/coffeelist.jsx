@@ -24,7 +24,7 @@ export default function CoffeeList({ coffeeItems }) {
           </span>
 
           <Link
-            to="/coffee/new"
+            to="/add-coffee"
             className="button button-dark"
           >
             Add Coffee
