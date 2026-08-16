@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom"
-import "./NavBar.css";
+import { Link } from "react-router-dom";
 
 function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -8,7 +7,7 @@ function NavBar() {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Menu", path: "/menu" },
-    { name: "Add Coffee", path: "/add-coffee" },
+    { name: "Add Coffee", path: "/coffee/new" },
   ];
 
   const closeMenu = () => {
@@ -18,67 +17,38 @@ function NavBar() {
   return (
     <header className="navbar">
       <div className="navbar-container">
-
-        {/* Logo */}
         <Link to="/" className="navbar-logo" onClick={closeMenu}>
-          <div className="logo-mark">BC</div>
-          <div className="logo-name">
-            Brew<span>Coffee</span>
-          </div>
+          <div className="logo-mark">B</div>
+          <div className="logo-name">Brew Coffee</div>
         </Link>
 
-        {/* Desktop Navigation */}
         <nav className="desktop-nav">
           {navLinks.map((link) => (
-            <NavLink
-              key={link.name}
-              to={link.path}
-              className={link.name === "Home" ? "active" : ""}
-            >
+            <Link key={link.name} to={link.path}>
               {link.name}
-            </NavLink>
+            </Link>
           ))}
         </nav>
 
-        {/* Actions */}
-        <div className="navbar-actions">
-
-          <button className="nav-icon" aria-label="Search">
-            <span>⌕</span>
-          </button>
-
-          <a href="/cart" className="cart-link" aria-label="Shopping cart">
-            <span className="cart-icon">🛒</span>
-            <span className="cart-count">0</span>
-          </a>
-
-          {/* Mobile Menu Button */}
-          <button
-            className={`menu-toggle ${menuOpen ? "open" : ""}`}
-            onClick={() => setMenuOpen((previous) => !previous)}
-            aria-label="Toggle menu"
-            aria-expanded={menuOpen}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-
-        </div>
+        <button
+          className="menu-toggle"
+          onClick={() => setMenuOpen((previous) => !previous)}
+          aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+        >
+          ☰
+        </button>
       </div>
 
-      {/* Mobile Menu */}
-      <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
-        {navLinks.map((link) => (
-          <NavLink key={link.name} to={link.path} onClick={closeMenu}>
-            {link.name}
-          </NavLink>
-        ))}
-
-        <a href="/cart" onClick={closeMenu}>
-          🛒 Cart
-        </a>
-      </div>
+      {menuOpen && (
+        <nav className="mobile-menu">
+          {navLinks.map((link) => (
+            <Link key={link.name} to={link.path} onClick={closeMenu}>
+              {link.name}
+            </Link>
+          ))}
+        </nav>
+      )}
     </header>
   );
 }
