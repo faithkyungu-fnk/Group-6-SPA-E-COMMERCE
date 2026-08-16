@@ -1,38 +1,62 @@
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 const fallbackImage =
   "https://images.pexels.com/photos/1235706/pexels-photo-1235706.jpeg?w=500";
 
-function CoffeeDetails({ coffeeItems, setCoffees }) {
+function CoffeeDetails() {
   const { coffeeId } = useParams();
   const navigate = useNavigate();
 
-  const coffee = coffeeItems.find(
-    (item) => item.id === Number(coffeeId)
-  );
+  const [coffee, setCoffee] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/coffees/${coffeeId}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Coffee not found");
+        }
+
+        return response.json();
+      })
+      .then((data) => {
+        setCoffee(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
+  }, [coffeeId]);
+
+  function handleDelete() {
+    fetch(`http://localhost:3000/coffees/${coffeeId}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to delete coffee");
+        }
+
+        navigate("/menu");
+      })
+      .catch((error) => {
+        console.error("Error deleting coffee:", error);
+      });
+  }
+
+  if (loading) {
+    return <p>Loading coffee...</p>;
+  }
 
   if (!coffee) {
     return (
-      <main className="page-stack">
-        <h1>Coffee not found</h1>
+      <div>
+        <h2>Coffee not found</h2>
         <Link to="/menu">Back to Menu</Link>
-      </main>
+      </div>
     );
-  }
-
-  function handleDelete() {
-    const confirmed = window.confirm(
-      `Delete ${coffee.name} from the menu?`
-    );
-
-    if (!confirmed) return;
-
-    const remaining = coffeeItems.filter(
-      (item) => item.id !== coffee.id
-    );
-
-    setCoffees(remaining);
-    navigate("/menu");
   }
 
   return (
@@ -50,8 +74,6 @@ function CoffeeDetails({ coffeeItems, setCoffees }) {
         </div>
 
         <div className="hero-copy">
-          <p className="subtitle">COFFEE DETAILS</p>
-
           <h1>{coffee.name}</h1>
 
           <p className="hero-description">
@@ -72,14 +94,11 @@ function CoffeeDetails({ coffeeItems, setCoffees }) {
             >
               Delete Coffee
             </button>
-
-            <Link
-              className="button button-dark"
-              to="/menu"
-            >
-              Back to Menu
-            </Link>
           </div>
+
+          <Link className="back-link" to="/menu">
+            Back to Menu
+          </Link>
         </div>
       </section>
     </main>

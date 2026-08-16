@@ -1,8 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 
 import NavBar from "./components/NavBar";
+import Home from "./pages/Home";
 import Menu from "./pages/Menu";
-import db from "./API/db";
+import AddCoffee from "./pages/AddCoffee";
+import CoffeeDetails from "./pages/CoffeeDetails";
 
 function App() {
   return (
@@ -10,8 +12,11 @@ function App() {
       <NavBar />
 
       <Routes>
-        <Route path="/" element={<Menu coffeeItems={db.coffees} />} />
-        <Route path="/menu" element={<Menu coffeeItems={db.coffees} />} />
+        <Route path="/" element={<Home />} />
+        <Route path="menu" element={<Menu />} />
+        <Route path="add-coffee" element={<AddCoffee />} />
+        <Route path="coffee/:coffeeId" element={<CoffeeDetails />} />
+
       </Routes>
     </>
   );
