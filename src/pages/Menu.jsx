@@ -1,6 +1,21 @@
 import CoffeeList from "../components/coffeelist";
+import useFetch from "../hooks/useFetch";
 
-function Menu({ coffeeItems }) {
+function Menu() {
+  const {
+    data: coffeeItems,
+    loading,
+    error,
+  }= useFetch("http://localhost:3000/coffees");
+
+  if (loading) {
+    return <p>Loading coffees...</p>
+  }
+
+  if(error) {
+    return <p>Error: {error}</p>;
+  }
+
   return (
     <main className="menu-page">
       <section className="menu-hero">

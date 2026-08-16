@@ -7,7 +7,7 @@ function NavBar() {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Menu", path: "/menu" },
-    { name: "Add Coffee", path: "/coffee/new" },
+    { name: "Add Coffee", path: "/add-coffee" },
   ];
 
   const closeMenu = () => {
