@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import CoffeeForm from "../components/coffeeform";
 
 const fallbackImage =
   "https://images.pexels.com/photos/1235706/pexels-photo-1235706.jpeg?w=500";
@@ -10,6 +11,7 @@ function CoffeeDetails() {
 
   const [coffee, setCoffee] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [editing, setEditing] = useState(false);
 
   useEffect(() => {
     fetch(`http://localhost:3000/coffees/${coffeeId}`)
@@ -29,6 +31,33 @@ function CoffeeDetails() {
         setLoading(false);
       });
   }, [coffeeId]);
+
+  function handleUpdateCoffee(coffeeData) {
+    fetch(`http://localhost:3000/coffees/${coffeeId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...coffeeData,
+        price: Number(coffeeData.price),
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to update coffee");
+        }
+
+        return response.json();
+      })
+      .then((updatedCoffee) => {
+        setCoffee(updatedCoffee);
+        setEditing(false);
+      })
+      .catch((error) => {
+        console.error("Error updating coffee:", error);
+      });
+  }
 
   function handleDelete() {
     fetch(`http://localhost:3000/coffees/${coffeeId}`, {
@@ -74,31 +103,59 @@ function CoffeeDetails() {
         </div>
 
         <div className="hero-copy">
-          <h1>{coffee.name}</h1>
+          {editing ? (
+            <>
+              <h1>Edit Coffee</h1>
 
-          <p className="hero-description">
-            {coffee.description}
-          </p>
+              <CoffeeForm
+                initialData={coffee}
+                onSubmit={handleUpdateCoffee}
+                buttonText="Save Changes"
+              />
 
-          <div className="meta-row">
-            <div>
-              <strong>Ksh {coffee.price}</strong>
-              <span>Price</span>
-            </div>
-          </div>
+              <button
+                className="button button-ghost"
+                onClick={() => setEditing(false)}
+              >
+                Cancel
+              </button>
+            </>
+          ) : (
+            <>
+              <h1>{coffee.name}</h1>
 
-          <div className="action-row">
-            <button
-              className="button button-ghost danger-text"
-              onClick={handleDelete}
-            >
-              Delete Coffee
-            </button>
-          </div>
+              <p className="hero-description">
+                {coffee.description}
+              </p>
 
-          <Link className="back-link" to="/menu">
-            Back to Menu
-          </Link>
+              <div className="meta-row">
+                <div>
+                  <strong>Ksh {coffee.price}</strong>
+                  <span>Price</span>
+                </div>
+              </div>
+
+              <div className="action-row">
+                <button
+                  className="button button-dark"
+                  onClick={() => setEditing(true)}
+                >
+                  Edit Coffee
+                </button>
+
+                <button
+                  className="button button-ghost danger-text"
+                  onClick={handleDelete}
+                >
+                  Delete Coffee
+                </button>
+              </div>
+
+              <Link className="back-link" to="/menu">
+                Back to Menu
+              </Link>
+            </>
+          )}
         </div>
       </section>
     </main>

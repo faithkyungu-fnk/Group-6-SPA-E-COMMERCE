@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function CoffeeForm({ onSubmit, initialData = {}}){
+function CoffeeForm({ onSubmit, initialData = {}, buttonText = "Add Coffee"}){
     const [formData, setFormData] = useState({
         name: initialData.name || "",
         price: initialData.price || "",
@@ -67,10 +67,10 @@ function CoffeeForm({ onSubmit, initialData = {}}){
             required
             />
 
-            <button type="submit">Add Coffee</button>
+            <button type="submit">{buttonText}</button>
         </form>
     );
 
 }
 
-export default CoffeeForm
+export default CoffeeForm;
