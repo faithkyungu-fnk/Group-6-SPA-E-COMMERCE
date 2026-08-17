@@ -1,22 +1,23 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route } from "react-router-dom";
+
 import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
-// import Menu from "./pages/Menu";
+import Menu from "./pages/Menu";
 import AddCoffee from "./pages/AddCoffee";
-// import CoffeeDetails from "./pages/CoffeeDetails";
+import CoffeeDetails from "./pages/CoffeeDetails";
 
 function App() {
   return (
     <>
+      <NavBar />
 
-    <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="menu" element={<Menu />} />
+        <Route path="add-coffee" element={<AddCoffee />} />
+        <Route path="coffee/:coffeeId" element={<CoffeeDetails />} />
 
-    <Routes>
-      <Route path="/" element={<Home />} />
-      {/* <Route path="menu" element={<Menu />} /> */}
-      <Route path="add-coffee" element={<AddCoffee />} />
-      {/* <Route path="cofee:id" element={<CoffeeDetails />} /> */}
-    </Routes>
+      </Routes>
     </>
   );
 }
