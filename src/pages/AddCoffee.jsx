@@ -1,11 +1,11 @@
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CoffeeForm from "../components/coffeeform";
 
-function AddCoffee(){
-    const navigate = useNavigate();
+function AddCoffee() {
+  const navigate = useNavigate();
 
-    function handleAddCoffee(coffeeData){
-        fetch("http://localhost:3000/coffees",{
+  function handleAddCoffee(coffeeData) {
+    fetch("http://localhost:3000/coffees", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -30,14 +30,13 @@ function AddCoffee(){
         console.error("Error adding coffee:", error);
       });
   }
-    
-    return(
-        <div>
-            <h1>Add Coffee</h1>
-            <CoffeeForm onSubmit={handleAddCoffee}/>
-        </div>
-    );
-  
+
+  return (
+    <div>
+      <h1>Add Coffee</h1>
+      <CoffeeForm onSubmit={handleAddCoffee} />
+    </div>
+  );
 }
 
 export default AddCoffee;
