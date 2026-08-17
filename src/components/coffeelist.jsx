@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import CoffeeCard from "./coffeecard";
+import SearchBar from "./searchbar";
 
 export default function CoffeeList({ coffeeItems }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -32,26 +33,10 @@ export default function CoffeeList({ coffeeItems }) {
         </div>
       </div>
 
-      <form
-        className="coffee-form"
-        onSubmit={(event) => event.preventDefault()}
-      >
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={(event) => setSearchTerm(event.target.value)}
-          placeholder="Search coffee..."
-          aria-label="Search coffee"
-        />
-
-        <button
-          className="button button-dark"
-          type="button"
-          disabled={!searchTerm.trim()}
-        >
-          Search
-        </button>
-      </form>
+      <SearchBar
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm} 
+      />
 
       <div className="coffee-list">
         {filteredCoffees.length === 0 ? (
