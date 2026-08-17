@@ -6,9 +6,11 @@ import SearchBar from "./searchbar";
 export default function CoffeeList({ coffeeItems }) {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredCoffees = coffeeItems.filter((coffee) =>
-    coffee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    coffee.description?.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredCoffees = coffeeItems.filter(
+    (coffee) =>
+      coffee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      coffee.origin?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      coffee.description?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -20,35 +22,22 @@ export default function CoffeeList({ coffeeItems }) {
         </div>
 
         <div className="heading-actions">
-          <span className="coffee-count">
-            {filteredCoffees.length}
-          </span>
+          <span className="coffee-count">{filteredCoffees.length}</span>
 
-          <Link
-            to="/add-coffee"
-            className="button button-dark"
-          >
+          <Link to="/add-coffee" className="button button-dark">
             Add Coffee
           </Link>
         </div>
       </div>
 
-      <SearchBar
-        searchTerm={searchTerm}
-        onSearchChange={setSearchTerm} 
-      />
+      <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
 
       <div className="coffee-list">
         {filteredCoffees.length === 0 ? (
-          <div className="coffee-empty">
-            No coffee found.
-          </div>
+          <div className="coffee-empty">No coffee found.</div>
         ) : (
           filteredCoffees.map((coffee) => (
-            <CoffeeCard
-              key={coffee.id}
-              coffee={coffee}
-            />
+            <CoffeeCard key={coffee.id} coffee={coffee} />
           ))
         )}
       </div>
